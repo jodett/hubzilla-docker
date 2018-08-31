@@ -19,6 +19,6 @@ fi
 sed -i "s/###SERVERNAME###/${SERVERNAME}/" /etc/nginx/conf.d/default.conf
 
 nginx
-php-fpm
+php-fpm7
 
 tail -F /var/log/*.log /var/log/nginx/*.log

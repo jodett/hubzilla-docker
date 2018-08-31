@@ -1,5 +1,5 @@
 
-FROM alpine:3.5
+FROM alpine:latest
 MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
 ENTRYPOINT ["/start.sh"]
@@ -9,7 +9,7 @@ ADD addons/nginx-server.conf /etc/nginx/conf.d/default.conf
 ADD addons/start.sh /start.sh
 
 # useable for any git references
-ENV HUBZILLAVERSION 2.4
+ENV HUBZILLAVERSION 3.4.1
 
 ENV HUBZILLAINTERVAL 10
 env SERVERNAME 127.0.0.1
@@ -25,20 +25,23 @@ RUN set -ex \
         gd \
         nginx \
         openssl \
-        php5 \
-        php5-curl \
-        php5-fpm \
-        php5-gd \
-        php5-json \
-        php5-pdo_mysql \
-        php5-pdo_pgsql \
-        php5-openssl \
-        php5-xml \
-        php5-zip \
+        php7 \
+        php7-curl \
+        php7-fpm \
+        php7-gd \
+        php7-json \
+        php7-pdo_mysql \
+        php7-pdo_pgsql \
+        php7-openssl \
+	php7-mbstring \
+	php7-ctype \
+	php7-session \
+        php7-xml \
+        php7-zip \
     && mkdir -p /run/nginx /hubzilla \
-    && curl https://codeload.github.com/redmatrix/hubzilla/tar.gz/${HUBZILLAVERSION} | tar -xz --strip-components=1 -C /hubzilla -f - \
+    && curl https://framagit.org/hubzilla/core/-/archive/${HUBZILLAVERSION}/core-${HUBZILLAVERSION}.tar.gz | tar -xz --strip-components=1 -C /hubzilla -f - \
     && chown nginx:nginx -R /hubzilla \
     && chmod 0777 /hubzilla \
-    && sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php5/php.ini \
+    && sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php7/php.ini \
     && chmod u+x /start.sh \
     && echo "*/###HUBZILLAINTERVAL###    *       *       *       *       cd /hubzilla; /usr/bin/php Zotlabs/Daemon/Master.php Cron" > /hubzilla-cron.txt
