@@ -4,7 +4,9 @@
 Dockerimage for <https://hubzilla.org>.
 
 
-# dependencies
+# config
+
+adjust docker-compose.yml
 
 # start
 
@@ -12,4 +14,4 @@ Dockerimage for <https://hubzilla.org>.
 docker-compose up -d
 ```
 
-then open http://yourserver/index.php?q=setup
+then open http://yourserver.org/index.php?q=setup
