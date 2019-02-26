@@ -10,8 +10,10 @@ services:
        context: .
        dockerfile: Dockerfile
      volumes:
-       - /data
+       - /local/hubzilla:/data
      restart: unless-stopped
+     environment:
+       SERVERNAME: hub.dettbarn.org
      ports:
        - "80"
      network_mode: "bridge"
@@ -19,7 +21,7 @@ services:
    hubdb:
      image: mariadb:latest
      volumes:
-       - /var/lib/mysql
+       - /local/hubdb:/var/lib/mysql
      restart: unless-stopped
      environment:
        MYSQL_ROOT_PASSWORD: password
