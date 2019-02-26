@@ -1,0 +1,30 @@
+version: '2.2'
+
+services:
+   hubzilla:
+     links:
+       - hubdb:db
+     hostname: hub
+     domainname: dettbarn.org
+     build:
+       context: .
+       dockerfile: Dockerfile
+     volumes:
+       - /data
+     restart: unless-stopped
+     ports:
+       - "80"
+     network_mode: "bridge"
+
+   hubdb:
+     image: mariadb:latest
+     volumes:
+       - /var/lib/mysql
+     restart: unless-stopped
+     environment:
+       MYSQL_ROOT_PASSWORD: password
+       MYSQL_DATABASE: hubdb
+       MYSQL_USER: hubdb
+       MYSQL_PASSWORD: hubdb-password
+     network_mode: "bridge"
+
