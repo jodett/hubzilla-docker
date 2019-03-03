@@ -5,7 +5,7 @@ services:
      links:
        - hubdb:db
      hostname: hub
-     domainname: dettbarn.org
+     domainname: example.org
      build:
        context: .
        dockerfile: Dockerfile

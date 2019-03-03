@@ -1,6 +1,7 @@
 
 FROM alpine:latest
-MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
+MAINTAINER Joachim <jay-joe@gmx.net>
+#THANKS TO Silvio Fricke <silvio.fricke@gmail.com>
 
 ENTRYPOINT ["/start.sh"]
 VOLUME /data
